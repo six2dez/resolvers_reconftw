@@ -1,0 +1,52 @@
+name: refresh-resolvers
+
+on:
+  schedule:
+  # Run daily
+    - cron:  '0 0 * * *'
+
+jobs:
+  resfresh-list:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+    
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GH_SECRET }}
+
+      - name: Checkout DNS Validator
+        uses: actions/checkout@v2
+        with:
+          repository: 'vortexau/dnsvalidator'
+          path: dnsvalidator
+    
+      - name: Install DNS Validator
+        run: |
+          cd dnsvalidator
+          python3 setup.py install
+    
+      - name: Generate new resolvers
+        run: dnsvalidator -tL https://public-dns.info/nameservers.txt -threads 20 --silent > ~/resolvers1.txt; dnsvalidator -tL https://raw.githubusercontent.com/blechschmidt/massdns/master/lists/resolvers.txt -threads 20 --silent > ~/resolvers2.txt; cat ~/resolvers1.txt ~/resolvers2.txt | sort -u > ~/resolvers.txt
+    
+      - name: Set current date
+        run: echo "NOW=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+     
+      - name: Commit changes
+        run: |
+          mv ~/resolvers.txt .
+          git config --local user.email "six2dez@gmail.com"
+          git config --local user.name "github-actions[bot]"
+          git add resolvers.txt
+          git commit -m "${NOW} update"
+    
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GH_SECRET }}
+          branch: main
