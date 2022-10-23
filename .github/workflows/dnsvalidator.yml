@@ -35,7 +35,7 @@ jobs:
         run: echo "" > resolvers.txt
      
       - name: Commit changes
-        run:
+        run: |
           git config --local user.email "six2dez@gmail.com"
           git config --local user.name "github-actions[bot]"
           git add resolvers.txt
