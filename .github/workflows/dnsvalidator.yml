@@ -1,9 +1,9 @@
 name: refresh-resolvers
 
 on:
-  schedule:
-  # Run daily
-    - cron:  '*/5 * * * *'
+  push:
+    branches:
+      - main
 
 jobs:
   resfresh-list:
