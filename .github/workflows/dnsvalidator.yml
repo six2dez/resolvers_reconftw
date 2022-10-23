@@ -32,7 +32,7 @@ jobs:
           python3 setup.py install
     
       - name: Generate new resolvers
-        run: dnsvalidator -tL https://public-dns.info/nameservers.txt -threads 20 --silent > ~/resolvers1.txt; dnsvalidator -tL https://raw.githubusercontent.com/blechschmidt/massdns/master/lists/resolvers.txt -threads 20 --silent > ~/resolvers2.txt; cat ~/resolvers1.txt ~/resolvers2.txt | sort -u > ~/resolvers.txt
+        run: dnsvalidator -tL https://public-dns.info/nameservers.txt -threads 100 --silent > ~/resolvers1.txt; dnsvalidator -tL https://raw.githubusercontent.com/blechschmidt/massdns/master/lists/resolvers.txt -threads 100 --silent > ~/resolvers2.txt; cat ~/resolvers1.txt ~/resolvers2.txt | sort -u > ~/resolvers.txt
     
       - name: Set current date
         run: echo "NOW=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
