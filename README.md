@@ -1,2 +1,2 @@
 # resolvers_reconftw
-Resolvers updated daily for reconftw
+Resolvers updated daily for reconftw 
