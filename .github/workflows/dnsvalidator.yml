@@ -48,6 +48,7 @@ jobs:
           wget -q -O source5.txt https://raw.githubusercontent.com/geraldino2/jart/fdefecdf4700a81c1cef525ad2764cb0b2f9e391/src/utils/base-resolvers.txt
           cd ..
           find sources -iname "*.txt" -exec cat {} + | sort -u > sources.txt
+          wc -l sources.txt
       - name: Generate new resolvers
         run: dnsvalidator -tL sources.txt -threads 50 --silent > resolvers.txt
      
