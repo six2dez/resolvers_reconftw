@@ -49,10 +49,11 @@ jobs:
           cd ..
       - name: Generate new resolvers
         run: |
+          touch resolverstmp.txt
           for i in $(find sources -iname "*.txt"); do
-            dnsvalidator -tL ${i} -threads 200 --silent > resolverstmp.txt
+            dnsvalidator -tL ${i} -threads 200 --silent >> resolverstmp.txt
           done
-          cat resolverstmp.txt | sort -u resolvers.txt
+          cat resolverstmp.txt | sort -u > resolvers.txt
       - name: Commit changes
         run: |
           git config --local user.email "six2dez@gmail.com"
