@@ -1,6 +1,6 @@
 name: refresh-resolvers
 
-#on:
+on:
   push:
     branches:
       - main
