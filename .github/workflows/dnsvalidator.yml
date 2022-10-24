@@ -30,8 +30,22 @@ jobs:
           cd dnsvalidator
           python3 setup.py install
     
+      - name: Download sources
+        run: |
+          mkdir sources
+          cd sources
+          git clone https://github.com/trickest/resolvers
+          git clone https://github.com/Abss0x7tbh/bass
+          git clone https://github.com/cxosmo/dns-resolvers
+          wget -q -O source1.txt https://public-dns.info/nameservers-all.txt
+          wget -q -O source2.txt https://raw.githubusercontent.com/blechschmidt/massdns/master/lists/resolvers.txt
+          wget -q -O source3.txt https://raw.githubusercontent.com/zeroc00I/test_github_action/main/resolvers.txt
+          wget -q -O source4.txt https://raw.githubusercontent.com/carlospolop/Auto_Wordlists/5eacd91aabb3e5870fb398fba07d7061a3eac54b/wordlists/trusted_resolvers.txt
+          wget -q -O source5.txt https://raw.githubusercontent.com/geraldino2/jart/fdefecdf4700a81c1cef525ad2764cb0b2f9e391/src/utils/base-resolvers.txt
+          cd ..
+          find sources -iname "*.txt" -exec cat {} + | sort -u > sources.txt
       - name: Generate new resolvers
-        run: dnsvalidator -tL https://public-dns.info/nameservers.txt -threads 200 --silent > resolvers1.txt; dnsvalidator -tL https://raw.githubusercontent.com/blechschmidt/massdns/master/lists/resolvers.txt -threads 200 --silent > resolvers2.txt; cat resolvers1.txt resolvers2.txt | sort -u > resolvers.txt
+        run: dnsvalidator -tL sources.txt -threads 50 --silent > resolvers.txt
      
       - name: Commit changes
         run: |
