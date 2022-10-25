@@ -1,12 +1,13 @@
 name: refresh-resolvers
 
-on:
-  push:
-    branches:
-      - main
+# for testing
 #on:
-#  schedule:
-#    - cron:  '0 0 * * *'
+#  push:
+#    branches:
+#      - main
+on:
+  schedule:
+    - cron:  '0 0 * * *'
 
 jobs:
   resfresh-list:
