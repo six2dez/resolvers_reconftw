@@ -1,8 +1,8 @@
 name: refresh-resolvers
 
 #on:
-##  push:
-    branches:
+#  push:
+#    branches:
 #      - main
 on:
   schedule:
