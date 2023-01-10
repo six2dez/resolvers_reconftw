@@ -31,15 +31,15 @@ jobs:
     
       - name: Install DNS Validator
         run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf "/usr/local/share/boost"
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
           cd dnsvalidator
           python3 setup.py install
     
       - name: Download sources
         run: |
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /opt/ghc
-          sudo rm -rf "/usr/local/share/boost"
-          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
           mkdir sources
           cd sources
           git clone https://github.com/trickest/resolvers
