@@ -1,13 +1,13 @@
 name: refresh-resolvers
 
 # for testing
-#on:
-#  push:
-#    branches:
-#      - main
 on:
-  schedule:
-    - cron:  '0 0 * * *'
+  push:
+    branches:
+      - main
+#on:
+#  schedule:
+#    - cron:  '0 0 * * *'
 
 jobs:
   resfresh-list:
@@ -52,7 +52,7 @@ jobs:
         run: |
           touch resolverstmp.txt
           for i in $(find sources -iname "*.txt"); do
-            dnsvalidator -tL ${i} -threads 200 --silent | sort -u > resolvers.txt
+            dnsvalidator -tL ${i} -threads 200 --silent >> resolvers.txt
           done
       - name: Commit changes
         run: |
