@@ -6,9 +6,8 @@ on:
     branches:
       - main
 #on:
-#  schedule:
-#    - cron:  '0 0 * * *'
-
+  schedule:
+    - cron:  '0 0 * * *'
 jobs:
   resfresh-list:
     runs-on: ubuntu-latest
@@ -37,6 +36,10 @@ jobs:
     
       - name: Download sources
         run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf "/usr/local/share/boost"
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
           mkdir sources
           cd sources
           git clone https://github.com/trickest/resolvers
