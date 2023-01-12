@@ -42,10 +42,10 @@ jobs:
           git clone https://github.com/Abss0x7tbh/bass
           git clone https://github.com/cxosmo/dns-resolvers
           wget -O source1.txt https://public-dns.info/nameservers-all.txt
-          wget -O source2.txt https://raw.githubusercontent.com/blechschmidt/massdns/master/lists/resolvers.txt
-          wget -O source3.txt https://raw.githubusercontent.com/zeroc00I/test_github_action/main/resolvers.txt
+          #wget -O source2.txt https://raw.githubusercontent.com/blechschmidt/massdns/master/lists/resolvers.txt
+          #wget -O source3.txt https://raw.githubusercontent.com/zeroc00I/test_github_action/main/resolvers.txt
           #wget -O source4.txt https://raw.githubusercontent.com/carlospolop/Auto_Wordlists/5eacd91aabb3e5870fb398fba07d7061a3eac54b/wordlists/trusted_resolvers.txt
-          wget -O source5.txt https://raw.githubusercontent.com/geraldino2/jart/fdefecdf4700a81c1cef525ad2764cb0b2f9e391/src/utils/base-resolvers.txt
+          #wget -O source5.txt https://raw.githubusercontent.com/geraldino2/jart/fdefecdf4700a81c1cef525ad2764cb0b2f9e391/src/utils/base-resolvers.txt
           cd ..
       - name: Generate new resolvers
         run: |
