@@ -2,9 +2,9 @@ name: refresh-resolvers
 
 # for testing
 on:
-  push:
-    branches:
-      - main
+#  push:
+#    branches:
+#      - main
 #on:
   schedule:
     - cron:  '0 0 * * *'
